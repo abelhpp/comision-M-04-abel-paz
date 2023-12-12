@@ -6,6 +6,7 @@ const usuarioRouter = require('express').Router();
     crearUsuario,
     editarUsuario,
     eliminarUsuario,
+    iniciarSesion,
 } = require('./../controllers/UsuariosController.js');
 
 
@@ -17,6 +18,9 @@ usuarioRouter.get('/usuario', verUsuario);
 
 // Crear usuario
 usuarioRouter.post('/usuario', crearUsuario);
+
+// Login
+usuarioRouter.post('/login', iniciarSesion);
 
 // Editar usuario
 usuarioRouter.put('/usuario', editarUsuario);

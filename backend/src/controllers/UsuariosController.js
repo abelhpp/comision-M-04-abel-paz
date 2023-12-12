@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const UsuarioModel = require('./../models/UsuarioModel');
-
+const jwt = require('jsonwebtoken');
 const UsuariosController = {}
+
+const JWT_KEY = process.env.JWT_KEY;
 
 // Ver usuarios
 UsuariosController.verUsuarios = async (req, res) => {
@@ -69,8 +71,6 @@ UsuariosController.crearUsuario = async (req, res) => {
 
 
 
-
-
 // Editar usuario
 UsuariosController.editarUsuario = async (req, res) => {
     try {
@@ -95,7 +95,7 @@ UsuariosController.eliminarUsuario = async (req, res) => {
     try {
         const { id } = req.body;
 
-        await UsuarioModel.findByIdAndDelete(id);
+        await UsuarioModel.findByIdAndUpdate(id, { estate: false });
 
         return res.json({ mensaje: 'Usuario eliminado con éxito' });
     } catch (error) {
@@ -104,6 +104,41 @@ UsuariosController.eliminarUsuario = async (req, res) => {
             error: error
         });
     }
-}
+};
+
+
+
+// Iniciar sesión
+UsuariosController.iniciarSesion = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Buscar el usuario por email
+        const usuarioEncontrado = await UsuarioModel.findOne({ email: email, state: true});
+
+        // Verificar si el usuario existe
+        if (!usuarioEncontrado) {
+            return res.status(401).json({ mensaje: 'Usuario inválidas' });
+        }
+
+        // Verificar la contraseña
+        const passwordMatch = await bcrypt.compare(password, usuarioEncontrado.password);
+
+        if (!passwordMatch) {
+            return res.status(402).json({ mensaje: 'Password inválidas' });
+        }
+        let datos = {
+            id: usuarioEncontrado._id,
+            nombre: usuarioEncontrado.name,
+            correo: usuarioEncontrado.email
+        }
+
+        let token = jwt.sign(datos, JWT_KEY, { expiresIn: '1h' });
+
+        return res.status(200).json({ token, datos});
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
+};
 
 module.exports = UsuariosController;

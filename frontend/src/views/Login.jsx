@@ -1,3 +1,21 @@
+import { Card } from 'react-bootstrap';
+import FormularioIngresar from '../components/FormLogin.jsx';
+
+
+ const Login =() =>{
+
+  return (
+    <Card.Body>
+        <FormularioIngresar/>
+    </Card.Body>
+  )
+}
+
+export default Login;
+
+
+
+/*
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
@@ -56,3 +74,4 @@ const Login = ({ history }) => {
 };
 
 export default Login;
+*/
