@@ -1,8 +1,8 @@
 import { createBrowserRouter, } from "react-router-dom";
 //importa vistas
 import Inicio from "./views/Inicio.jsx";
-import Ingresar from "./views/Ingresar.jsx";
-import Eliminar from "./views/Eliminar.jsx";
+import Ingresar from "./views/Registrar.jsx";
+import Login from "./views/Login.jsx";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <Eliminar/>,
+        element: <Login/>,
     },
 ]);
 
