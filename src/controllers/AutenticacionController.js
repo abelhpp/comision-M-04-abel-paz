@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const UsuarioModel = require('./../models/UsuarioModel');
 const AutenticacionController = {}
 
 const JWT_KEY = process.env.JWT_KEY;
@@ -9,13 +9,29 @@ const usuarios = [
     { id: 2, usuario: 'Lady', contrasenia: 'abcdef' },
 ];
 
-AutenticacionController.autenticar = (req, res) => {
-    const usuario = req.body.usuario;
+AutenticacionController.autenticar = async(req, res) => {
+    try{
+        const {email, password} = req.body.usuario;
+        // Simular autenticación
+        const authToken = await UsuarioModel.findOne({ where: {email, password} })
 
-    // Simular autenticación
-    let token = jwt.sign({ usuario: usuario }, JWT_KEY);
+        if(!authToken) {
+            return res.status(403).json({ mensaje: 'El usuario no fue encontrado.' })
+        }
 
-    res.json({ token: token });
+        const datos = {
+            id: authToken._id,
+            email: authToken.email,
+            name: authToken.name,
+            lastname: authToken.lastname,
+            ege: authToken.ege,
+        }
+        let token = jwt.sign(datos, JWT_KEY);
+
+        res.json({ token: token, datos });
+    } catch (error){
+        return res.status(500).json({mensaje: 'Se produjo un error INTERNO'})
+    }
 }
 
 AutenticacionController.registrar = (req, res) => {
