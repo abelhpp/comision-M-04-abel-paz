@@ -1,0 +1,12 @@
+const { Schema, model } = require('mongoose');
+
+const PostSchema = new Schema({
+    title: { type: String, required: true },
+    description: { type: String, maxlength: 500, required: true },
+    imageURL: { type: String, maxlength: 255, required: true },
+    author: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true }
+});
+
+const PostModel = model('post', PostSchema);
+
+module.exports = PostModel;
