@@ -1,10 +1,9 @@
 import { createContext, useContext, useState } from "react";
 import {
     guardarDatos,
-    guardarToken,
-    obtenerDatos,
-    obtenerToken,
-    limpiarLocalStorage,
+    getDatos,
+    limpiarStorage,
+    getToken,
 } from "../utils/login";
 
 const AuthContext = createContext();
@@ -12,26 +11,22 @@ const AuthContext = createContext();
 const AuthProvider = (props) => {
     const { children } = props;
 
-    const [usuario, setUsuario] = useState(obtenerDatos());
-    const [token, setToken] = useState(obtenerToken());
+    const [usuario, setUsuario] = useState(null);
+    const [token, setToken] = useState(null);
 
-    const login = (datos, token) => {
-        guardarDatos(datos);
-        guardarToken(token);
-
-        setUsuario(datos);
-        setToken(token);
+    const loginContext = () => {
+        setUsuario(getDatos());
+        setToken(getToken());
     }
 
     const logout = () => {
-        limpiarLocalStorage();
-
+        limpiarStorage();
         setUsuario(null);
         setToken(null);
     }
 
     return (
-        <AuthContext.Provider value={{ usuario, token, login, logout }}>
+        <AuthContext.Provider value={{ usuario, token, loginContext, logout }}>
             { children }
         </AuthContext.Provider>
     );

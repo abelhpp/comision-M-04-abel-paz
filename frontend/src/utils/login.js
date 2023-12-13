@@ -7,10 +7,17 @@ export const guardarDatos = (data) => {
 
 
 export const getDatos = () => {
-    let datos = windows.localstorage.getItem('usuario'); 
+    let datos = window.localStorage.getItem('usuario'); 
     return JSON.parse(datos);
 }
 
+export const limpiarStorage = () => {
+    window.localStorage.removeItem('token'); 
+    window.localStorage.removeItem('usuario');
+}
+
+
+
 export const getToken = () => { 
-    return windows.localstorage.getItem('token');
+    return window.localStorage.getItem('token');
 }

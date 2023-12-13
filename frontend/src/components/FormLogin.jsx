@@ -1,29 +1,31 @@
 import { useState } from 'react';
 import { Alert, Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { guardarDatos, getDatos, getToken } from '../utils/login';
-
+import { guardarDatos} from '../utils/login';
+import { useAuthContext } from '../context/AuthContext';
 
 
 
 const FormularioIngresar = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errores, setErrores] = useState({});
+    const { loginContext } = useAuthContext();
 
 
 
     const cargarDatos = async () => {
         try {
-            console.log(email);
-            console.log(password);
-
             const response = await axios.post('http://localhost:3000/login', {
                 email: email,
                 password: password,
             });
             if(response.status === 200){
                 guardarDatos(response.data);
+                loginContext();
+                navigate('/')
             }else{
                 setErrores({error:"Los datos ingresados no son validos: "})
             }
