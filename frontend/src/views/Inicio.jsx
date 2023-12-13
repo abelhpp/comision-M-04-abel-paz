@@ -12,6 +12,7 @@ const Inicio =() =>{
 
   const [lista, setLista] = useState([]);
 
+
   const cargarLista = async () =>{
     setLista([
       {nombre: 'Rosa', apellido: 'Sosa'},

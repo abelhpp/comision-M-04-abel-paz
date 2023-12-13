@@ -53,4 +53,5 @@ AutenticacionController.verificarToken = (req, res) => {
     }
 }
 
+
 module.exports = AutenticacionController;

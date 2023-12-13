@@ -1,6 +1,7 @@
 import { RouterProvider } from "react-router-dom"
+import { AuthProvider, useAuthContext } from "./context/AuthContext.jsx"
 import { router } from "./router"
-import DefaultLayout from "./layout/DefaultLayout"
+import DefaultLayout from "./layout/DefaultLayout.jsx"
 
 
 
@@ -9,9 +10,11 @@ import DefaultLayout from "./layout/DefaultLayout"
 const App = () => {
 
   return (
-    <DefaultLayout>
-      <RouterProvider router={router}/>
-    </DefaultLayout>
+    <AuthProvider>
+      <DefaultLayout>
+        <RouterProvider router={router}/>
+      </DefaultLayout>
+    </AuthProvider>
   )
 }
 
