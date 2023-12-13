@@ -1,7 +1,6 @@
 import {Nav, Navbar, Container, } from 'react-bootstrap';
 import { IcoSalir, IcoLogin } from './Ico';
 import { useAuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 const MyNavbar = ()=> {
   const { usuario, logout } = useAuthContext();
