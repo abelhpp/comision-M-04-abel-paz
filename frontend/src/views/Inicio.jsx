@@ -2,10 +2,10 @@
 //import MyNavbar from './components/Navbar.jsx';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Row } from 'react-bootstrap';
 
-import TablaDatos from './../components/TablaDatos.jsx'
-
+import TablaDatos from './../components/TablaDatos.jsx';
+import MyModel from './../components/ModelPost.jsx';
 
 
 const Inicio =() =>{
@@ -28,10 +28,18 @@ const Inicio =() =>{
 
 
   return (
-      <Card.Body>
-        <TablaDatos lista={ lista }/>
-      </Card.Body>
-
+    <>
+      
+        <Card.Body className="d-flex justify-content-center align-items-center">
+          <MyModel/>
+        </Card.Body>  
+      
+      <Row className="mt-2">
+        <Card.Body>
+          <TablaDatos lista={ lista }/>
+        </Card.Body>
+      </Row>
+    </>
   )
 }
 
