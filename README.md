@@ -7,7 +7,7 @@ Bienvenido a ViajesDev, registro, login y publicar post
 - **Crear cuenta**
 - **Hacer login**
 - **Crear post**
-- **...**
+- **Ver los post (trabajando)**
 
 ## Cómo Empezar
 1. Clona el repositorio: `https://github.com/abelhpp/comision-M-04-abel-paz.git`

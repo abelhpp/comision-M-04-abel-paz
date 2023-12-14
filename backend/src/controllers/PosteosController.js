@@ -1,10 +1,6 @@
-const bcrypt = require('bcrypt');
-
 const PostModel = require('../models/PostModel');
-const jwt = require('jsonwebtoken');
 const PosteosController = {}
 
-const JWT_KEY = process.env.JWT_KEY;
 
 // Ver usuarios
 PosteosController.verPosts = async (req, res) => {
@@ -18,7 +14,7 @@ PosteosController.verPosts = async (req, res) => {
             error: error
         });
     }
-}
+};
 
 // Ver usuario
 PosteosController.verPost = async (req, res) => {
@@ -46,10 +42,11 @@ PosteosController.verPost = async (req, res) => {
 // Crear Nuevo usuario
 PosteosController.crearPost = async (req, res) => {
     try {
-        const { title, description, imageURL, author} = req.body;
+        const {author} = req.body;
 
+        const { title, description, imageURL} = req.body;
 
-        const nuevo = new UsuarioModel({
+        const nuevo = new PostModel({
             title: title,
             description: description,
             imageURL: imageURL,
@@ -57,10 +54,10 @@ PosteosController.crearPost = async (req, res) => {
             state: true,  // Guardar el hash en lugar de la contraseña origina
         });
 
-        await PostModel.save();
-
-        return res.json({ mensaje: 'Publicacion creado con éxito' });
+        await nuevo.save();
+        return res.status(200).json({ mensaje: 'Publicacion creado con éxito' });
     } catch (error) {
+        console.log(error.message);
         return res.status(500).json({
             mensaje: 'Ocurrió un error interno al intentar crear la Publicacion',
             error: error.message

@@ -44,7 +44,7 @@ AutenticacionController.verificarToken = (req, res) => {
     try {
         let desencriptado = jwt.verify(token, JWT_KEY);
 
-        res.json({ datos: desencriptado });
+        res.status(200).json({ datos: desencriptado });
     } catch (error) {
         res.status(500).json({
             mensaje: 'Se ha generado un error',
