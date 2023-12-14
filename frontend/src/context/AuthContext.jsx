@@ -11,8 +11,8 @@ const AuthContext = createContext();
 const AuthProvider = (props) => {
     const { children } = props;
 
-    const [usuario, setUsuario] = useState(null);
-    const [token, setToken] = useState(null);
+    const [usuario, setUsuario] = useState(getDatos());
+    const [token, setToken] = useState(getToken());
 
     const loginContext = () => {
         setUsuario(getDatos());

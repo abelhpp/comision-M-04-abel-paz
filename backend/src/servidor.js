@@ -9,7 +9,7 @@ const conectarMongo = require('./config/MongooseConfig.js');
 
 const usuarioRouter = require('./routes/usuarioRoutes.js');
 const autenticacionRouter = require('./routes/autenticacionRoutes.js');
-
+const postRouter = require('./routes/postRoutes.js');
 const app = express();
 const PORT = 3000;
 
@@ -21,6 +21,7 @@ app.use(fileUpload());
 // Rutas
 app.use(usuarioRouter);
 app.use(autenticacionRouter);
+app.use(postRouter);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
