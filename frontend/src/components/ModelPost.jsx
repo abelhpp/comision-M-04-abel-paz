@@ -53,11 +53,8 @@ const MyModel = () => {
     const handleSubmit = async () => {
         try {
             const url = "http://localhost:3000/post"
-            console.log(datosPost);
             const response = await axios.post(url, datosPost);
-            console.log(response.data);
-            //Maneja la respuesta del backend según tus necesidades
-            // Cierra el modal después de guardar cambios
+
             handleClose();
         } catch (error) {
             console.error('Error al crear un nuevo postModel:', error.message);
@@ -66,7 +63,7 @@ const MyModel = () => {
 
     return (
         <>
-            <div className="d-flex flex-column align-items-center">
+            
                 <Button className="mb-2" variant="primary" onClick={handleShow}>
                     Nuevo POST
                 </Button>
@@ -75,7 +72,7 @@ const MyModel = () => {
                         {errorSession.out}
                     </Alert>
                 )}
-            </div>        
+                    
             <Modal show={showModal} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Nuevo postModel de {usuario && `"${usuario}"`}</Modal.Title>

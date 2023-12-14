@@ -5,13 +5,24 @@ const PosteosController = {}
 // Ver usuarios
 PosteosController.verPosts = async (req, res) => {
     try {
-        const lista = await PostModel.find();
+        const lista = await PostModel.find().populate('author');
+
+        const posts = lista.map(post => ({
+            _id: post._id,
+            title: post.title,
+            description: post.description,
+            imageURL: post.imageURL,
+            state: post.state,
+            authorid: post.author._id,
+            nombre: post.author.name
+                
+        }));
         
-        return res.json(lista);
+        return res.status(200).json(posts);
     } catch (error) {
         return res.status(500).json({
             mensaje: 'Ocurrió un error interno',
-            error: error
+            error: error.message
         });
     }
 };
@@ -102,5 +113,10 @@ PosteosController.eliminarPost = async (req, res) => {
     }
 };
 
+const tpy = [{"_id":"657a5d9fa609f5e317e31240","title":"uno","description":"es el post uno","imageURL":"as.js","state":true,"authorid":"65752e6e98e8a90c71af1811","nombre":"ABEL HUMBERTO"},
+{"_id":"657a74bb999f0a4fd459ce39","title":"dos","description":"Descripcion Dos","imageURL":"dos.git","state":true,"authorid":"65752e6e98e8a90c71af1811","nombre":"ABEL HUMBERTO"},
+{"_id":"657a7a83999f0a4fd459ce40","title":"tres","description":"descripcion tres","imageURL":"https://docmed.ar/wp-content/uploads/2023/07/DOCMED-IMAGEN-PARALIMPICOS-CARRERA-519-X-370.png","state":true,"authorid":"65752e6e98e8a90c71af1811","nombre":"ABEL HUMBERTO"},
+{"_id":"657a7a9b999f0a4fd459ce42","title":"tres","description":"descripcion tres","imageURL":"https://docmed.ar/wp-content/uploads/2023/07/DOCMED-IMAGEN-PARALIMPICOS-CARRERA-519-X-370.png","state":true,"authorid":"65752e6e98e8a90c71af1811","nombre":"ABEL HUMBERTO"}
+]
 
 module.exports = PosteosController;

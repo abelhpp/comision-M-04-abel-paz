@@ -9,7 +9,7 @@ const postRouter = require('express').Router();
 
 
 // Ver usuarios
-postRouter.get('/post', verPosts);
+postRouter.get('/posts', verPosts);
 
 // Ver usuario
 postRouter.get('/post', verPost);
