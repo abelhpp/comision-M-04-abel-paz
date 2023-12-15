@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { FloatingLabel, Form, Button } from 'react-bootstrap';
-
+import { useAuthContext } from '../context/AuthContext';
 const FormComment = ({ids}) => {
+    const { token } = useAuthContext();
     const [user, setUser] = useState(ids.authorid);
     const [post, setPost] = useState(ids._id);
     const [coment, setComent] = useState("");
@@ -31,23 +32,26 @@ const FormComment = ({ids}) => {
         }        
     };// fin cargarDatos
 
+
+
     return (
         <div>
-        <Form>
-            <FloatingLabel controlId="floatingTextarea2" label="Comments">
-                <Form.Control
-                as="textarea"
-                placeholder="Leave a comment here"
-                style={{ height: '100px' }}
-                value={coment}
-                onChange={(e) => setComent(e.target.value)}
-                />
-            </FloatingLabel>
-            <Button variant="primary" onClick={cargarDatos}>
-                Comentar
-            </Button>
-        </Form>
-
+        {token && (
+            <Form>
+                <FloatingLabel controlId="floatingTextarea2" label="Comments">
+                    <Form.Control
+                    as="textarea"
+                    placeholder="Leave a comment here"
+                    style={{ height: '100px' }}
+                    value={coment}
+                    onChange={(e) => setComent(e.target.value)}
+                    />
+                </FloatingLabel>
+                <Button variant="primary" onClick={cargarDatos}>
+                    Comentar
+                </Button>
+            </Form>
+        )}
             <div>
                 {list.map(id => (
                 <div key={id}>
