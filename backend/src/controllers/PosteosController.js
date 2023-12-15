@@ -1,4 +1,5 @@
 const PostModel = require('../models/PostModel');
+const ComentarioModel = require('../models/ComentarioModel')
 const PosteosController = {}
 
 
@@ -6,18 +7,20 @@ const PosteosController = {}
 PosteosController.verPosts = async (req, res) => {
     try {
         const lista = await PostModel.find().populate('author');
-
-        const posts = lista.map(post => ({
-            _id: post._id,
-            title: post.title,
-            description: post.description,
-            imageURL: post.imageURL,
-            state: post.state,
-            authorid: post.author._id,
-            nombre: post.author.name
-                
+        const posts = await Promise.all(lista.map(async (post) => {
+            const comentarios = await ComentarioModel.find({ post: post._id }).select('_id');
+            return {
+                _id: post._id,
+                title: post.title,
+                description: post.description,
+                imageURL: post.imageURL,
+                state: post.state,
+                authorid: post.author._id,
+                nombre: post.author.name,
+                comentarios: comentarios.map(comentario => comentario._id)
+            };
         }));
-        
+
         return res.status(200).json(posts);
     } catch (error) {
         return res.status(500).json({

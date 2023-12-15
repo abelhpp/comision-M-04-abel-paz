@@ -8,8 +8,9 @@ Bienvenido a ViajesDev, registro, login y publicar post
 - **Hacer login**
 - **Crear post**
 - **Ver los post**
-- **crear comentarios(trabajando...)**
-
+- **crear comentarios**
+- **Ver comentarios(trabajando...)**
+- **Diseño estetico**
 ## Cómo Empezar
 1. Clona el repositorio: `https://github.com/abelhpp/comision-M-04-abel-paz.git`
 2. Ingresa en la carpeta del backend: `cd backend`
