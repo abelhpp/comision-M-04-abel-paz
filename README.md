@@ -9,8 +9,9 @@ Bienvenido a ViajesDev, registro, login y publicar post
 - **Crear post**
 - **Ver los post**
 - **crear comentarios**
-- **Ver comentarios(trabajando...)**
-- **Diseño estetico**
+- **Ver comentarios**
+- **Diseño estetico(trabajando)**
+- **Me llevo mucho tiempre aprender react y la parte de estetica no voy a llegar a completar.**
 ## Cómo Empezar
 1. Clona el repositorio: `https://github.com/abelhpp/comision-M-04-abel-paz.git`
 2. Ingresa en la carpeta del backend: `cd backend`
