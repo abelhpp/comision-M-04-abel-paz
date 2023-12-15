@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { guardarDatos} from '../utils/login';
-import { useAuthContext } from '../context/AuthContext';
-import { Card, Row, FloatingLabel, Form, Button } from 'react-bootstrap';
+import { FloatingLabel, Form, Button } from 'react-bootstrap';
 
 const FormComment = ({ids}) => {
     const [user, setUser] = useState(ids.authorid);
     const [post, setPost] = useState(ids._id);
     const [coment, setComent] = useState("");
-
+    const [list, setList] = useState(ids.comentarios);
     const cargarDatos = async() =>{
         try {
 
@@ -22,7 +20,9 @@ const FormComment = ({ids}) => {
             //envio nuevo a crear
             const response = await axios.post(url, nuevo);
             if(response.status === 200){
-                console.log("Enviado")
+                console.log("Enviado");
+                setList([...list, coment]);
+                setComent("");
             }
             
         } catch (error) {
@@ -47,6 +47,19 @@ const FormComment = ({ids}) => {
                 Comentar
             </Button>
         </Form>
+
+            <div>
+                {list.map(id => (
+                <div key={id}>
+                    <Form.Control
+                    as="textarea"
+                    style={{ height: '100px' }}
+                    value={`Comment: ${id}`}
+                    readOnly
+                    />
+                </div>
+                ))}
+            </div>
         </div>
     );
 };

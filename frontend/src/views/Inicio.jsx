@@ -61,11 +61,7 @@ const Inicio = () => {
             <CardPost post={post}/>  
           </Button> 
           <Toast show={toastStates[post._id]} onClose={() => toggleShow(post._id)}>
-          <FormComment  ids={ post }/>
-            <div style={{ width: '100%', height: '60px', background: 'red' }}>{post._id}</div>
-            <div style={{ width: '100%', height: '60px', background: 'pink' }}></div>
-            <div style={{ width: '100%', height: '60px', background: 'blue' }}></div>
-            <div style={{ width: '100%', height: '60px', background: 'azure' }}></div>  
+          <FormComment  ids={ post }/> 
           </Toast>
         </div>
       ))}
